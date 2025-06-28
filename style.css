@@ -211,17 +211,14 @@ h1,
 
     #controls {
         margin-top: 0;
-        display: grid;
-        grid-template-areas: 
-            ". up ."
-            "left down right";
-        gap: 10px;
+        display: flex; /* flexboxを使用 */
+        flex-direction: column; /* 縦並び */
+        align-items: center; /* 中央揃え */
     }
 
-    #up-button { grid-area: up; }
-    #down-button { grid-area: down; }
-    #left-button { grid-area: left; }
-    #right-button { grid-area: right; }
+    .horizontal-buttons {
+        flex-direction: row; /* 横並び */
+    }
 
     .control-button {
         width: 70px;
