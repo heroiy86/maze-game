@@ -18,6 +18,8 @@ function init() {
 
     player = { x: 0, y: 0 };
     goal = { x: mazeSize - 1, y: mazeSize - 1 };
+    console.log('Player initial position:', player);
+    console.log('Goal position:', goal);
 
     maze = generateMaze(mazeSize, mazeSize);
     draw();

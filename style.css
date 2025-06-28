@@ -52,9 +52,6 @@ h1,
     max-width: 80%; /* Limit max width */
     min-width: 250px; /* Ensure minimum width */
     box-sizing: border-box; /* Include padding in width */
-    display: flex; /* Use flexbox for internal layout */
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center items horizontally */
     display: none; /* Hidden by default */
 }
 
