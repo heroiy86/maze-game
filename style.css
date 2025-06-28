@@ -120,6 +120,43 @@ h1,
     background-color: #FF69B4; /* Hot Pink */
 }
 
+#game-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#start-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+#start-button:hover {
+    background-color: #45a049;
+}
+
+#timer {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+#final-time {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 @keyframes pop-up {
     0% {
         transform: translate(-50%, -50%) scale(0.5);
