@@ -7,6 +7,7 @@ const gameContainer = document.getElementById('game-container');
 let maze, player, goal, cellSize, mazeSize;
 
 function init() {
+    winMessage.style.display = 'none'; // Ensure popup is hidden on init
     console.log('init() called');
     const containerSize = Math.min(gameContainer.clientWidth, gameContainer.clientHeight);
     canvas.width = containerSize;
