@@ -181,6 +181,13 @@ canvas.addEventListener('touchmove', (e) => {
 
 
 newGameButton.addEventListener('click', init);
+
+// Control button event listeners
+document.getElementById('up-button').addEventListener('click', () => movePlayer(0, -1));
+document.getElementById('down-button').addEventListener('click', () => movePlayer(0, 1));
+document.getElementById('left-button').addEventListener('click', () => movePlayer(-1, 0));
+document.getElementById('right-button').addEventListener('click', () => movePlayer(1, 0));
+
 window.addEventListener('resize', init);
 
 init();

@@ -71,6 +71,38 @@ h1 {
     display: none;
 }
 
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.horizontal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.control-button {
+    width: 60px;
+    height: 60px;
+    font-size: 2em;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-button:hover {
+    background-color: #e5533d;
+}
+
 @keyframes pop-up {
     0% {
         transform: translate(-50%, -50%) scale(0.5);
