@@ -3,11 +3,23 @@ const ctx = canvas.getContext('2d');
 const winMessage = document.getElementById('win-message');
 const newGameButton = document.getElementById('new-game-button');
 const gameContainer = document.getElementById('game-container');
+const startButton = document.getElementById('start-button');
+const timerDisplay = document.getElementById('timer');
+const finalTimeDisplay = document.getElementById('final-time');
+const controls = document.getElementById('controls');
 
 let maze, player, goal, cellSize, mazeSize;
+let startTime, timerInterval;
+let gameStarted = false;
 
 function init() {
-    winMessage.style.display = 'none'; // Ensure popup is hidden on init
+    winMessage.style.display = 'none';
+    startButton.style.display = 'block'; // Show start button
+    timerDisplay.textContent = '00:00.000'; // Reset timer display
+    gameStarted = false;
+
+    
+
     const containerSize = Math.min(gameContainer.clientWidth, gameContainer.clientHeight);
     canvas.width = containerSize;
     canvas.height = containerSize;
@@ -20,6 +32,29 @@ function init() {
 
     maze = generateMaze(mazeSize, mazeSize);
     draw();
+}
+
+function startGame() {
+    gameStarted = true;
+    startButton.style.display = 'none'; // Hide start button
+    controls.style.display = 'flex'; // Show controls
+    canvas.style.display = 'block'; // Show canvas
+    
+    startTime = Date.now();
+    timerInterval = setInterval(updateTimer, 10);
+}
+
+function updateTimer() {
+    const elapsedTime = Date.now() - startTime;
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+    const milliseconds = elapsedTime % 1000;
+
+    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
 }
 
 function generateMaze(width, height) {
@@ -110,6 +145,8 @@ function draw() {
 }
 
 function movePlayer(dx, dy) {
+    if (!gameStarted) return; // Prevent movement before game starts
+
     const newX = player.x + dx;
     const newY = player.y + dy;
 
@@ -125,89 +162,97 @@ function movePlayer(dx, dy) {
     draw();
 
     if (player.x === goal.x && player.y === goal.y) {
+        stopTimer();
+        const finalTime = timerDisplay.textContent;
+        finalTimeDisplay.textContent = `タイム: ${finalTime}`;
         winMessage.style.display = 'flex'; // Show popup on win
     }
 }
 
 // Keyboard controls
 window.addEventListener('keydown', (e) => {
-    // Check if win message is hidden before allowing movement
-    if (winMessage.style.display === 'none') {
-        switch (e.key) {
-            case 'ArrowUp':
-                e.preventDefault();
-                movePlayer(0, -1);
-                break;
-            case 'ArrowDown':
-                e.preventDefault();
-                movePlayer(0, 1);
-                break;
-            case 'ArrowLeft':
-                e.preventDefault();
-                movePlayer(-1, 0);
-                break;
-            case 'ArrowRight':
-                e.preventDefault();
-                movePlayer(1, 0);
-                break;
-        }
+    if (!gameStarted || winMessage.style.display === 'flex') return; // Prevent movement if game not started or win message is shown
+    switch (e.key) {
+        case 'ArrowUp':
+            e.preventDefault();
+            movePlayer(0, -1);
+            break;
+        case 'ArrowDown':
+            e.preventDefault();
+            movePlayer(0, 1);
+            break;
+        case 'ArrowLeft':
+            e.preventDefault();
+            movePlayer(-1, 0);
+            break;
+        case 'ArrowRight':
+            e.preventDefault();
+            movePlayer(1, 0);
+            break;
     }
 });
 
 // Touch controls
 let lastTouchX, lastTouchY;
 canvas.addEventListener('touchstart', (e) => {
+    if (!gameStarted || winMessage.style.display === 'flex') return; // Prevent movement if game not started or win message is shown
     e.preventDefault();
     lastTouchX = e.touches[0].clientX;
     lastTouchY = e.touches[0].clientY;
 }, { passive: false });
 
 canvas.addEventListener('touchmove', (e) => {
+    if (!gameStarted || winMessage.style.display === 'flex') return; // Prevent movement if game not started or win message is shown
     e.preventDefault();
-    if (winMessage.style.display === 'none') {
-        const touchX = e.touches[0].clientX;
-        const touchY = e.touches[0].clientY;
+    const touchX = e.touches[0].clientX;
+    const touchY = e.touches[0].clientY;
 
-        const dx = touchX - lastTouchX;
-        const dy = touchY - lastTouchY;
+    const dx = touchX - lastTouchX;
+    const dy = touchY - lastTouchY;
 
-        // Determine movement direction based on the larger absolute difference
-        if (Math.abs(dx) > Math.abs(dy)) {
-            if (dx > cellSize / 2) { // Move right if dragged more than half a cell
-                movePlayer(1, 0);
-                lastTouchX = touchX; // Reset last touch to prevent multiple moves for one drag
-            } else if (dx < -cellSize / 2) { // Move left
-                movePlayer(-1, 0);
-                lastTouchX = touchX;
-            }
-        } else {
-            if (dy > cellSize / 2) { // Move down
-                movePlayer(0, 1);
-                lastTouchY = touchY;
-            } else if (dy < -cellSize / 2) { // Move up
-                movePlayer(0, -1);
-                lastTouchY = touchY;
-            }
+    // Determine movement direction based on the larger absolute difference
+    if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > cellSize / 2) { // Move right if dragged more than half a cell
+            movePlayer(1, 0);
+            lastTouchX = touchX; // Reset last touch to prevent multiple moves for one drag
+        } else if (dx < -cellSize / 2) { // Move left
+            movePlayer(-1, 0);
+            lastTouchX = touchX;
+        }
+    } else {
+        if (dy > cellSize / 2) { // Move down
+            movePlayer(0, 1);
+            lastTouchY = touchY;
+        } else if (dy < -cellSize / 2) { // Move up
+            movePlayer(0, -1);
+            lastTouchY = touchY;
         }
     }
 });
 
 // Button controls
 document.getElementById('up-button').addEventListener('click', () => {
-    if (winMessage.style.display === 'none') movePlayer(0, -1);
+    if (!gameStarted || winMessage.style.display === 'flex') return; // Prevent movement if game not started or win message is shown
+    movePlayer(0, -1);
 });
 document.getElementById('down-button').addEventListener('click', () => {
-    if (winMessage.style.display === 'none') movePlayer(0, 1);
+    if (!gameStarted || winMessage.style.display === 'flex') return; // Prevent movement if game not started or win message is shown
+    movePlayer(0, 1);
 });
 document.getElementById('left-button').addEventListener('click', () => {
-    if (winMessage.style.display === 'none') movePlayer(-1, 0);
+    if (!gameStarted || winMessage.style.display === 'flex') return; // Prevent movement if game not started or win message is shown
+    movePlayer(-1, 0);
 });
 document.getElementById('right-button').addEventListener('click', () => {
-    if (winMessage.style.display === 'none') movePlayer(1, 0);
+    if (!gameStarted || winMessage.style.display === 'flex') return; // Prevent movement if game not started or win message is shown
+    movePlayer(1, 0);
 });
 
 // New game button
 newGameButton.addEventListener('click', init);
+
+// Start button
+startButton.addEventListener('click', startGame);
 
 // Initialize game on load
 document.addEventListener('DOMContentLoaded', init);

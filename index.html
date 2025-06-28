@@ -9,11 +9,16 @@
 <body>
     <h1>めいろゲーム</h1>
     <p class="game-description">😀があなただよ！<br>★のゴールをめざしてね。<br>ボタンをおすか、ゆびでなぞってすすもう！</p>
+    <div id="game-info">
+        <button id="start-button">ゲームスタート！</button>
+        <div id="timer">00:00.000</div>
+    </div>
     <div id="game-layout">
         <div id="game-container">
             <canvas id="maze-canvas"></canvas>
             <div id="win-message">
                 <p>クリア！<br>おめでとう！</p>
+                <p id="final-time"></p>
                 <button id="new-game-button">あたらしいめいろ</button>
             </div>
         </div>
