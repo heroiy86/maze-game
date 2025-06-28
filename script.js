@@ -15,10 +15,10 @@ let gameStarted = false;
 function init() {
     winMessage.style.display = 'none';
     startButton.style.display = 'block'; // Show start button
-    controls.style.display = 'none'; // Hide controls initially
-    canvas.style.display = 'none'; // Hide canvas initially
     timerDisplay.textContent = '00:00.000'; // Reset timer display
     gameStarted = false;
+
+    
 
     const containerSize = Math.min(gameContainer.clientWidth, gameContainer.clientHeight);
     canvas.width = containerSize;
