@@ -44,29 +44,39 @@ h1,
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px 40px;
+    padding: 30px 50px; /* Increase padding */
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     animation: pop-up 0.5s ease-out;
+    max-width: 80%; /* Limit max width */
+    min-width: 250px; /* Ensure minimum width */
+    box-sizing: border-box; /* Include padding in width */
+    display: flex; /* Use flexbox for internal layout */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center items horizontally */
 }
 
 #win-message p {
     font-size: 1.5em;
     font-weight: bold;
     color: #228b22;
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Slightly more space below text */
+    line-height: 1.4; /* Improve readability of text */
 }
 
 #new-game-button {
-    padding: 10px 20px;
-    font-size: 1em;
+    width: 100%; /* Make button take full width of popup */
+    max-width: 200px; /* Limit button max width */
+    padding: 15px 25px; /* Increase button padding */
+    font-size: 1.1em; /* Slightly larger font */
     color: #fff;
     background-color: #ff6347;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px; /* Ensure separation from text */
 }
 
 #new-game-button:hover {
