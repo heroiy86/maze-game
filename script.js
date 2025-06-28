@@ -50,7 +50,7 @@ function updateTimer() {
     const seconds = Math.floor((elapsedTime % 60000) / 1000);
     const milliseconds = elapsedTime % 1000;
 
-    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
+    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 function stopTimer() {
