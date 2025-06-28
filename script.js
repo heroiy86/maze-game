@@ -7,6 +7,7 @@ const gameContainer = document.getElementById('game-container');
 let maze, player, goal, cellSize, mazeSize;
 
 function init() {
+    winMessage.style.display = 'none'; // Ensure popup is hidden on init
     const containerSize = Math.min(gameContainer.clientWidth, gameContainer.clientHeight);
     canvas.width = containerSize;
     canvas.height = containerSize;
@@ -19,7 +20,6 @@ function init() {
 
     maze = generateMaze(mazeSize, mazeSize);
     draw();
-    winMessage.classList.add('hidden');
 }
 
 function generateMaze(width, height) {
@@ -125,13 +125,14 @@ function movePlayer(dx, dy) {
     draw();
 
     if (player.x === goal.x && player.y === goal.y) {
-        winMessage.classList.remove('hidden');
+        winMessage.style.display = 'flex'; // Show popup on win
     }
 }
 
 // Keyboard controls
 window.addEventListener('keydown', (e) => {
-    if (winMessage.classList.contains('hidden')) {
+    // Check if win message is hidden before allowing movement
+    if (winMessage.style.display === 'none') {
         switch (e.key) {
             case 'ArrowUp':
                 e.preventDefault();
@@ -163,7 +164,7 @@ canvas.addEventListener('touchstart', (e) => {
 
 canvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
-    if (winMessage.classList.contains('hidden')) {
+    if (winMessage.style.display === 'none') {
         const touchX = e.touches[0].clientX;
         const touchY = e.touches[0].clientY;
 
