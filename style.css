@@ -192,8 +192,7 @@ h1,
         flex-direction: row; /* 横並びにする */
         align-items: center;
         justify-content: center;
-        width: auto; /* 自動調整 */
-        max-width: none; /* 制限を解除 */
+        flex-grow: 1; /* 利用可能なスペースを埋める */
         gap: 20px; /* 迷路とボタンの間に隙間 */
     }
 
@@ -205,6 +204,7 @@ h1,
     }
 
     #game-container {
+        flex-grow: 1; /* 利用可能なスペースを埋める */
         max-height: calc(100vh - 20px); /* 画面の高さからpaddingを引いた値 */
         max-width: calc(100vh - 20px); /* 画面の高さからpaddingを引いた値 */
     }
