@@ -124,7 +124,6 @@ h1,
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 #start-button {
@@ -157,6 +156,13 @@ h1,
     margin-bottom: 15px;
 }
 
+#info-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* Default margin for portrait */
+}
+
 @keyframes pop-up {
     0% {
         transform: translate(-50%, -50%) scale(0.5);
@@ -171,17 +177,23 @@ h1,
 @media (orientation: landscape) {
     body {
         flex-direction: row; /* 横並びにする */
-        justify-content: center; /* 中央揃え */
-        align-items: center; /* 中央揃え */
+        justify-content: space-around; /* 左右に均等に配置 */
+        align-items: flex-start; /* 上に寄せる */
         padding: 10px;
+    }
+
+    #info-panel {
+        align-items: flex-start; /* 左寄せ */
+        margin-bottom: 0; /* 縦方向のマージンをリセット */
+        margin-right: 20px; /* ゲーム画面との間にスペース */
     }
 
     #game-layout {
         flex-direction: row; /* 横並びにする */
         align-items: center;
         justify-content: center;
-        width: 100%;
-        max-width: 90vw; /* 画面幅の90%に制限 */
+        width: auto; /* 自動調整 */
+        max-width: none; /* 制限を解除 */
         gap: 20px; /* 迷路とボタンの間に隙間 */
     }
 
@@ -189,11 +201,12 @@ h1,
     .game-description {
         margin-bottom: 10px;
         font-size: 1em;
+        text-align: left; /* 左寄せ */
     }
 
     #game-container {
-        max-height: 80vh; /* 画面の高さに合わせて調整 */
-        max-width: 80vh; /* アスペクト比を維持 */
+        max-height: 90vh; /* 画面の高さに合わせて調整 */
+        max-width: 90vh; /* アスペクト比を維持 */
     }
 
     #controls {
