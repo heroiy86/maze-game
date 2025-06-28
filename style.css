@@ -176,16 +176,16 @@ h1,
 
 @media (orientation: landscape) {
     body {
-        flex-direction: row; /* 横並びにする */
-        justify-content: flex-start; /* 左寄せ */
-        align-items: flex-start; /* 上に寄せる */
+        flex-direction: column; /* 縦並びにする */
+        justify-content: center; /* 中央寄せ */
+        align-items: center; /* 中央寄せ */
         padding: 10px;
     }
 
     #info-panel {
         flex-direction: row; /* 横並びにする */
         align-items: center; /* 垂直方向中央揃え */
-        justify-content: flex-start; /* 左寄せ */
+        justify-content: center; /* 中央寄せ */
         margin-bottom: 0; /* 縦方向のマージンをリセット */
         margin-right: 20px; /* ゲーム画面との間にスペース */
         width: 100%; /* 幅を確保 */

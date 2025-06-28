@@ -15,7 +15,7 @@ let gameStarted = false;
 function init() {
     winMessage.style.display = 'none';
     startButton.style.display = 'block'; // Show start button
-    timerDisplay.textContent = '00:00.000'; // Reset timer display
+    timerDisplay.textContent = '00:00'; // Reset timer display
     gameStarted = false;
 
     
