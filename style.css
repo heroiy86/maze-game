@@ -55,6 +55,7 @@ h1,
     display: flex; /* Use flexbox for internal layout */
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center items horizontally */
+    display: none; /* Hidden by default */
 }
 
 #win-message p {
