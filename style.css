@@ -113,3 +113,31 @@ h1 {
         opacity: 1;
     }
 }
+
+@media (orientation: landscape) {
+    body {
+        justify-content: flex-start; /* 上から配置 */
+        padding: 10px; /* 余白を追加 */
+    }
+
+    h1,
+    .game-description {
+        margin-bottom: 5px; /* タイトルと説明文の下の余白を減らす */
+        font-size: 0.8em; /* テキストを小さくする */
+    }
+
+    #game-container {
+        max-height: 60vh; /* ゲーム画面の最大高さを調整 */
+        max-width: 60vh; /* アスペクト比を維持しつつ、幅も高さに合わせる */
+    }
+
+    #controls {
+        margin-top: 10px; /* コントロールの上の余白を減らす */
+    }
+
+    .control-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5em;
+    }
+}
