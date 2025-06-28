@@ -143,17 +143,17 @@ h1,
 }
 
 #timer {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
     color: #333;
 }
 
 #final-time {
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
     color: #007bff;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #info-panel {
