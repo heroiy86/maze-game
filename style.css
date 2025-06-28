@@ -183,9 +183,21 @@ h1,
     }
 
     #info-panel {
-        align-items: flex-start; /* 左寄せ */
+        flex-direction: row; /* 横並びにする */
+        align-items: center; /* 垂直方向中央揃え */
+        justify-content: flex-start; /* 左寄せ */
         margin-bottom: 0; /* 縦方向のマージンをリセット */
         margin-right: 20px; /* ゲーム画面との間にスペース */
+        width: 100%; /* 幅を確保 */
+        flex-wrap: wrap; /* 折り返しを許可 */
+    }
+
+    h1,
+    .game-description {
+        margin-bottom: 0; /* マージンをリセット */
+        margin-right: 20px; /* 要素間のスペース */
+        font-size: 1em;
+        text-align: left; /* 左寄せ */
     }
 
     #game-layout {
@@ -194,13 +206,6 @@ h1,
         justify-content: center;
         flex-grow: 1; /* 利用可能なスペースを埋める */
         gap: 20px; /* 迷路とボタンの間に隙間 */
-    }
-
-    h1,
-    .game-description {
-        margin-bottom: 10px;
-        font-size: 1em;
-        text-align: left; /* 左寄せ */
     }
 
     #game-container {
