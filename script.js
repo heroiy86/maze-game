@@ -8,7 +8,6 @@ let maze, player, goal, cellSize, mazeSize;
 
 function init() {
     winMessage.style.display = 'none'; // Ensure popup is hidden on init
-    console.log('init() called');
     const containerSize = Math.min(gameContainer.clientWidth, gameContainer.clientHeight);
     canvas.width = containerSize;
     canvas.height = containerSize;
@@ -17,9 +16,7 @@ function init() {
     cellSize = canvas.width / mazeSize;
 
     player = { x: 0, y: 0 };
-    goal = { x: mazeSize - 1, y: mazeSize - 1 };
-    console.log('Player initial position:', player);
-    console.log('Goal position:', goal);
+    goal = { x: mazeSize - 1, y: mazeSize - 1 };    
 
     maze = generateMaze(mazeSize, mazeSize);
     draw();
@@ -194,3 +191,23 @@ canvas.addEventListener('touchmove', (e) => {
         }
     }
 });
+
+// Button controls
+document.getElementById('up-button').addEventListener('click', () => {
+    if (winMessage.style.display === 'none') movePlayer(0, -1);
+});
+document.getElementById('down-button').addEventListener('click', () => {
+    if (winMessage.style.display === 'none') movePlayer(0, 1);
+});
+document.getElementById('left-button').addEventListener('click', () => {
+    if (winMessage.style.display === 'none') movePlayer(-1, 0);
+});
+document.getElementById('right-button').addEventListener('click', () => {
+    if (winMessage.style.display === 'none') movePlayer(1, 0);
+});
+
+// New game button
+newGameButton.addEventListener('click', init);
+
+// Initialize game on load
+document.addEventListener('DOMContentLoaded', init);
