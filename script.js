@@ -7,7 +7,6 @@ const gameContainer = document.getElementById('game-container');
 let maze, player, goal, cellSize, mazeSize;
 
 function init() {
-    winMessage.style.display = 'none'; // Ensure popup is hidden on init
     const containerSize = Math.min(gameContainer.clientWidth, gameContainer.clientHeight);
     canvas.width = containerSize;
     canvas.height = containerSize;
@@ -134,10 +133,22 @@ function movePlayer(dx, dy) {
 window.addEventListener('keydown', (e) => {
     if (winMessage.classList.contains('hidden')) {
         switch (e.key) {
-            case 'ArrowUp': movePlayer(0, -1); break;
-            case 'ArrowDown': movePlayer(0, 1); break;
-            case 'ArrowLeft': movePlayer(-1, 0); break;
-            case 'ArrowRight': movePlayer(1, 0); break;
+            case 'ArrowUp':
+                e.preventDefault();
+                movePlayer(0, -1);
+                break;
+            case 'ArrowDown':
+                e.preventDefault();
+                movePlayer(0, 1);
+                break;
+            case 'ArrowLeft':
+                e.preventDefault();
+                movePlayer(-1, 0);
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                movePlayer(1, 0);
+                break;
         }
     }
 });
