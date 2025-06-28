@@ -177,7 +177,7 @@ h1,
 @media (orientation: landscape) {
     body {
         flex-direction: row; /* 横並びにする */
-        justify-content: space-around; /* 左右に均等に配置 */
+        justify-content: flex-start; /* 左寄せ */
         align-items: flex-start; /* 上に寄せる */
         padding: 10px;
     }
@@ -205,8 +205,8 @@ h1,
     }
 
     #game-container {
-        max-height: 90vh; /* 画面の高さに合わせて調整 */
-        max-width: 90vh; /* アスペクト比を維持 */
+        max-height: calc(100vh - 20px); /* 画面の高さからpaddingを引いた値 */
+        max-width: calc(100vh - 20px); /* 画面の高さからpaddingを引いた値 */
     }
 
     #controls {
