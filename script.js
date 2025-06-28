@@ -142,27 +142,39 @@ window.addEventListener('keydown', (e) => {
 });
 
 // Touch controls
-let touchStartX, touchStartY;
+let lastTouchX, lastTouchY;
 canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
+    lastTouchX = e.touches[0].clientX;
+    lastTouchY = e.touches[0].clientY;
 }, { passive: false });
 
-canvas.addEventListener('touchend', (e) => {
+canvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
     if (winMessage.classList.contains('hidden')) {
-        const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
-        const dx = touchEndX - touchStartX;
-        const dy = touchEndY - touchStartY;
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
 
-        if (Math.abs(dx) > Math.abs(dy)) { // Horizontal swipe
-            if (dx > 30) movePlayer(1, 0); // Right
-            else if (dx < -30) movePlayer(-1, 0); // Left
-        } else { // Vertical swipe
-            if (dy > 30) movePlayer(0, 1); // Down
-            else if (dy < -30) movePlayer(0, -1); // Up
+        const dx = touchX - lastTouchX;
+        const dy = touchY - lastTouchY;
+
+        // Determine movement direction based on the larger absolute difference
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx > cellSize / 2) { // Move right if dragged more than half a cell
+                movePlayer(1, 0);
+                lastTouchX = touchX; // Reset last touch to prevent multiple moves for one drag
+            } else if (dx < -cellSize / 2) { // Move left
+                movePlayer(-1, 0);
+                lastTouchX = touchX;
+            }
+        } else {
+            if (dy > cellSize / 2) { // Move down
+                movePlayer(0, 1);
+                lastTouchY = touchY;
+            } else if (dy < -cellSize / 2) { // Move up
+                movePlayer(0, -1);
+                lastTouchY = touchY;
+            }
         }
     }
 }, { passive: false });
