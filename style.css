@@ -10,9 +10,15 @@ body {
     color: #333;
 }
 
-h1 {
-    color: #ff6347;
-    text-shadow: 2px 2px 4px #ccc;
+h1,
+.game-description {
+    text-align: center;
+}
+
+#game-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #game-container {
@@ -116,28 +122,48 @@ h1 {
 
 @media (orientation: landscape) {
     body {
-        justify-content: flex-start; /* 上から配置 */
-        padding: 10px; /* 余白を追加 */
+        flex-direction: column; /* 縦並びを維持 */
+        justify-content: flex-start;
+        padding: 10px;
+    }
+
+    #game-layout {
+        flex-direction: row; /* 横並びにする */
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 90vw; /* 画面幅の90%に制限 */
+        gap: 20px; /* 迷路とボタンの間に隙間 */
     }
 
     h1,
     .game-description {
-        margin-bottom: 5px; /* タイトルと説明文の下の余白を減らす */
-        font-size: 0.8em; /* テキストを小さくする */
+        margin-bottom: 10px;
+        font-size: 1em;
     }
 
     #game-container {
-        max-height: 60vh; /* ゲーム画面の最大高さを調整 */
-        max-width: 60vh; /* アスペクト比を維持しつつ、幅も高さに合わせる */
+        max-height: 80vh; /* 画面の高さに合わせて調整 */
+        max-width: 80vh; /* アスペクト比を維持 */
     }
 
     #controls {
-        margin-top: 10px; /* コントロールの上の余白を減らす */
+        margin-top: 0;
+        display: grid;
+        grid-template-areas: 
+            ". up ."
+            "left down right";
+        gap: 10px;
     }
 
+    #up-button { grid-area: up; }
+    #down-button { grid-area: down; }
+    #left-button { grid-area: left; }
+    #right-button { grid-area: right; }
+
     .control-button {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5em;
+        width: 70px;
+        height: 70px;
+        font-size: 2.5em;
     }
 }
